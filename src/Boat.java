@@ -33,9 +33,6 @@ public class Boat {
     public ArrayList<Cell> getCellList(){
         return cells;
     }
-
-
-
     
     public void receiveHit() {
         for (int index = 0; index < cells.size(); index++) { 		      

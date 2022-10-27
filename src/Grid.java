@@ -18,7 +18,6 @@ public class Grid {
         Cell empty_cell;
         String mergedCoord;
         for (int i = 0; i < boardsize; i++) {
-            System.out.print(i);
             for (char c = 'A'; c <= 'J'; ++c) {
                 mergedCoord = Character.toString(c) + Integer.toString(i);
                 empty_cell = new Cell(mergedCoord, mergedCoord, false, false);
@@ -42,7 +41,11 @@ public class Grid {
         String cellValue;
         String mergedCoord;
         String vertical = "|";
-        String header = "===== OCEAN GRID =====";
+        if (this.human == false) {
+            this.header = "===== Oponent GRID =====";
+        } else {
+            this.header = "===== OCEAN GRID =====";
+        }
         String plusMinusLine = " +-+-+-+-+-+-+-+-+-+-+";
         String xAxis = "  A B C D E F G H I J";
         String equals = "=======================";

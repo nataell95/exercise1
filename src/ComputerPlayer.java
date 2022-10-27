@@ -28,19 +28,17 @@ public class ComputerPlayer extends Player {
                     firstNumber = r.nextInt(10);
                     lastNumber = firstNumber;
                 }
-
-                coord = Character.toString(firstLetter) + Integer.toString(firstLetter) + "," + Character.toString(lastLetter) + Integer.toString(lastNumber) ;
+                coord = Character.toString(firstLetter) + Integer.toString(firstNumber) + ","
+                        + Character.toString(lastLetter) + Integer.toString(lastNumber);
                 boolean input_valid = checkForValidInput(coord);
                 if (input_valid == false) {
                     nrboat--;                    
                 } else {
-                    Boat boa = new Boat(type.typofboat(), type.lengthofboat(), coord, type.returnSymbol(), true);
+                    Boat boa = new Boat(type.typofboat(), type.lengthofboat(), coord, type.returnSymbol(), false);
                     boolean boatPlacable = grid.tryBoatplacement(boa);
                     if (boatPlacable == false) {
                         nrboat--; 
-                    } else {
-                        System.out.println("boat was placed");
-                    }
+                    } 
                 }
             }
         }

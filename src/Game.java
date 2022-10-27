@@ -21,8 +21,9 @@ public class Game {
 
     public static void main(String[] args) throws Exception {
         ComputerPlayer computer = new ComputerPlayer(false);
-        HumanPlayer human = new HumanPlayer(true);
-        human.showgrid();
+        /*HumanPlayer human = new HumanPlayer(true);*/
+        computer.showgrid();
+        /*human.showgrid();*/
           
     }
 

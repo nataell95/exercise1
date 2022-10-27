@@ -24,7 +24,6 @@ public class Cell {
             this.value = " ";
         }
     }
-
     
     public String getValue() {
         return this.value;
