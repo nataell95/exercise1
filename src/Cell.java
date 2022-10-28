@@ -38,6 +38,10 @@ public class Cell {
         return this.coord;
     }
 
+    public boolean alreadyShoot() {
+        return this.isTouched;
+    }
+
     public void isTouched() {
         this.isTouched = true;
         if (this.isboat == true) {

@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Grid {
-    
+    Grid grid;
     ArrayList<Boat> boats = new ArrayList<Boat>();
     Hashtable<String, Cell> cellDict = new Hashtable<String, Cell>();
     String header;
@@ -9,7 +9,6 @@ public class Grid {
 
     public Grid(boolean human) {
         initboard();
-        computeHeader();
         this.human = human;
     }
 
@@ -32,7 +31,7 @@ public class Grid {
         {
             this.header = "===== OCEAN GRID =====";
         } else {
-            this.header = "===== Target GRID =====";
+            this.header = "===== TARGET GRID =====";
         }
     }
     
@@ -41,15 +40,11 @@ public class Grid {
         String cellValue;
         String mergedCoord;
         String vertical = "|";
-        if (this.human == false) {
-            this.header = "===== Oponent GRID =====";
-        } else {
-            this.header = "===== OCEAN GRID =====";
-        }
         String plusMinusLine = " +-+-+-+-+-+-+-+-+-+-+";
         String xAxis = "  A B C D E F G H I J";
         String equals = "=======================";
-        System.out.print(header);
+        computeHeader();
+        System.out.print(this.header);
         System.out.print("\n\n\n");
         System.out.println(xAxis);
         System.out.println(plusMinusLine);
@@ -75,7 +70,7 @@ public class Grid {
         if (this.human == false){
             System.out.print("\n\n");
             System.out.print("-----------------------");
-            System.out.print("\n\n");
+            System.out.print("\n\n\n");
         };
 
     }
@@ -92,28 +87,37 @@ public class Grid {
         }
     }
 
-    public boolean tryBoatplacement(Boat boa) {
-        ArrayList<Cell> cells = boa.getCellList();
+    public boolean checkCellFree(String coordinates) {
         boolean placable;
-        Cell dictCell;
-        for (int i = 0; i < cells.size(); ++i) {
-            Cell cell = cells.get(i);
-            String cellcoord = cell.getCoord();
-            boolean cellExists = cellDict.containsKey(cellcoord);
-            dictCell = cellDict.get(cellcoord);
-            if (cellExists == true) {
-                if (dictCell.isboat == true) {
-                    placable = false;
-                    return placable;
-                }
-            } else {
+        boolean cellExists = cellDict.containsKey(coordinates);
+        Cell dictCell = cellDict.get(coordinates);
+        if (cellExists == true) {
+            if (dictCell.isboat == true) {
                 placable = false;
                 return placable;
             }
+        } else {
+            placable = false;
+            return placable;
         }
         placable = true;
-        placeBoat(boa);
         return placable;
+
+
+    }
+
+    public boolean tryPlacement(Boat boat) {
+        boolean cellPlacable;
+        ArrayList<Cell> cells = boat.getCellList();
+        for (int i = 0; i < cells.size(); ++i) {
+            Cell cell = cells.get(i);
+            cellPlacable = checkCellFree(cell.getCoord());
+            if (cellPlacable == false) {
+                return false; 
+            }
+        }
+        placeBoat(boat);
+        return true;
     }
 
     private void placeBoat(Boat boa) {
@@ -126,16 +130,21 @@ public class Grid {
     }
 
     public boolean placeBomb(String coord) {
-        boolean checkPosition = cellDict.contains(coord);
-        boolean alreadyShot = cellDict.contains(coord);
+        boolean checkPosition = this.cellDict.containsKey(coord);
+        String alreadyShot;
+        boolean isTouched;
         if (checkPosition == false) {
             return false;
-        } else if (alreadyShot == true) {
-            return false;
         } else {
-            cellDict.get("coord").isTouched();
+            isTouched = cellDict.get(coord).isTouched;
+            alreadyShot = cellDict.get(coord).getValue();
+            if (isTouched == true || alreadyShot.equals("X")){
+                return false;
+            } else {
+            cellDict.get(coord).isTouched();
             checkBoats();
             return true;
+        }
         }
 
     }

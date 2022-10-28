@@ -1,19 +1,19 @@
-
+import java.util.Scanner;
 
 abstract class Player {
     boolean human;
     Grid grid;
+    Scanner scanner;
+    String playerTurn = "computer";
 
-    public Player(boolean human) {
-        this.grid = new Grid(human);
-        this.grid.initboard();
-        this.human = human;
+    public Player() {
+        this.scanner = new Scanner(System.in);
     }
 
     public enum Boatsenum {
-        CARRIER("Carrier", 6,0,"C"),
-        BATTLESHIP("Battleship", 4,0,"B"),
-        SUBMARINE("Submarine", 3,0,"S"),
+        CARRIER("Carrier", 6,2,"C"),
+        BATTLESHIP("Battleship", 4,2,"B"),
+        SUBMARINE("Submarine", 3,2,"S"),
         PATROLBOAT("Patrolboat", 2,2,"P");
 
         private final String type;
@@ -46,8 +46,8 @@ abstract class Player {
     }
     
 
-    public boolean hasLost(Grid grid) {
-        if (grid.PlayerLost() == true) {
+    public boolean hasLost() {
+        if (this.grid.PlayerLost() == true) {
             return true;
         }
         else {
@@ -56,18 +56,17 @@ abstract class Player {
         
     }
 
-    public boolean checkForValidInput(String input){/*has to be done */
+    public boolean checkForValidInput(String input) {/*has to be done */
         return true;
     }
     
-    public void showgrid() {
-        this.grid.drawGrid();
-    }
+    abstract boolean getShotAtPosition(String coord);
+    
+    abstract void changeTurn();
 
-    public void shootboat(Grid grid, String coord) {
-        grid.placeBomb(coord);
-    }
+    abstract void showgrid();
 
+    abstract String shootAtCoord();
 
     public void playRound() {
         
