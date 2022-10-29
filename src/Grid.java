@@ -87,7 +87,7 @@ public class Grid {
         }
     }
 
-    public boolean checkCellFree(String coordinates) {
+    private boolean checkCellFree(String coordinates) {
         boolean placable;
         boolean cellExists = cellDict.containsKey(coordinates);
         Cell dictCell = cellDict.get(coordinates);

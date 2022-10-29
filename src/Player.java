@@ -47,13 +47,7 @@ abstract class Player {
     
 
     public boolean hasLost() {
-        if (this.grid.PlayerLost() == true) {
-            return true;
-        }
-        else {
-            return false;
-        }
-        
+        return this.grid.PlayerLost();
     }
 
     public boolean checkForValidInput(String input) {/*has to be done */
