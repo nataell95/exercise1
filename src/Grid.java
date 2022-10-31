@@ -1,18 +1,17 @@
 import java.util.*;
 
 public class Grid {
-    Grid grid;
-    ArrayList<Boat> boats = new ArrayList<Boat>();
-    Hashtable<String, Cell> cellDict = new Hashtable<String, Cell>();
-    String header;
-    boolean human;
+    private ArrayList<Boat> boats = new ArrayList<Boat>();
+    private Hashtable<String, Cell> cellDict = new Hashtable<String, Cell>();
+    private String header;
+    private boolean human;
 
     public Grid(boolean human) {
         initboard();
         this.human = human;
     }
 
-    public void initboard() {
+    private void initboard() {
         int boardsize = 10;
         Cell empty_cell;
         String mergedCoord;
@@ -92,7 +91,7 @@ public class Grid {
         boolean cellExists = cellDict.containsKey(coordinates);
         Cell dictCell = cellDict.get(coordinates);
         if (cellExists == true) {
-            if (dictCell.isboat == true) {
+            if (dictCell.getBolBoat() == true) {
                 placable = false;
                 return placable;
             }
@@ -136,7 +135,7 @@ public class Grid {
         if (checkPosition == false) {
             return false;
         } else {
-            isTouched = cellDict.get(coord).isTouched;
+            isTouched = cellDict.get(coord).alreadyShoot();
             alreadyShot = cellDict.get(coord).getValue();
             if (isTouched == true || alreadyShot.equals("X")){
                 return false;

@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
 abstract class Player {
-    boolean human;
-    Grid grid;
-    Scanner scanner;
-    String playerTurn = "computer";
+    protected boolean human;
+    protected Grid grid;
+    protected Scanner scanner;
+    protected String playerTurn = "computer";
 
     public Player() {
         this.scanner = new Scanner(System.in);
@@ -49,14 +49,8 @@ abstract class Player {
     public boolean hasLost() {
         return this.grid.PlayerLost();
     }
-
-    public boolean checkForValidInput(String input) {/*has to be done */
-        return true;
-    }
     
     abstract boolean getShotAtPosition(String coord);
-    
-    abstract void changeTurn();
 
     abstract void showgrid();
 

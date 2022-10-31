@@ -1,12 +1,12 @@
 import java.util.Random;
 
 public class ComputerPlayer extends Player {
-    Random r = new Random();
-    int lastNumber;
-    int firstNumber;
-    char firstLetter;
-    char lastLetter;
-    String coord;
+    private Random r = new Random();
+    private int lastNumber;
+    private int firstNumber;
+    private char firstLetter;
+    private char lastLetter;
+    private String coord;
 
     public ComputerPlayer() {
         super();
@@ -32,16 +32,12 @@ public class ComputerPlayer extends Player {
                 }
                 coord = Character.toString(firstLetter) + Integer.toString(firstNumber) + ","
                         + Character.toString(lastLetter) + Integer.toString(lastNumber);
-                boolean input_valid = checkForValidInput(coord);
-                if (input_valid == false) {
+                Boat boa = new Boat(type.typofboat(), type.lengthofboat(), coord, type.returnSymbol(), false);
+                boolean boatPlacable = grid.tryPlacement(boa);
+                if (boatPlacable == false) {
                     nrboat--;
-                } else {
-                    Boat boa = new Boat(type.typofboat(), type.lengthofboat(), coord, type.returnSymbol(), false);
-                    boolean boatPlacable = grid.tryPlacement(boa);
-                    if (boatPlacable == false) {
-                        nrboat--;
-                    }
                 }
+                
             }
         }
     }
@@ -70,9 +66,5 @@ public class ComputerPlayer extends Player {
         this.grid.drawGrid();
     }
     
-    @Override
-    public void changeTurn() {
-        playerTurn = "human";
-    }
-    
+
 }

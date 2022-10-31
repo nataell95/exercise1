@@ -1,12 +1,11 @@
 import java.util.*;
 public class Game {
-    Random r = new Random();
-    String[] playersNames = { "Computer", "Human" };
-    String currentPlayer;
-    String computerPlayer;
-    ComputerPlayer computer;
-    HumanPlayer human;
-    boolean shotSucceded;
+    private Random r = new Random();
+    private String[] playersNames = { "Computer", "Human" };
+    private String currentPlayer;
+    private ComputerPlayer computer;
+    private HumanPlayer human;
+    private boolean shotSucceded;
     
     private void initializeGame() {
         this.currentPlayer = playersNames[r.nextInt(2)];
@@ -62,6 +61,7 @@ private void gameOver() {
     public static void main(String[] args) throws Exception {
         Game game = new Game();
         game.initializeGame();
+        game.showGrids();
         while(true){
             game.playRound();
         }

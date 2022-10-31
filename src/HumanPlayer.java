@@ -1,4 +1,6 @@
 public class HumanPlayer extends Player {
+    private char coordinatesChars[];
+
     public HumanPlayer() {
         super();
         this.grid = new Grid(true);
@@ -30,6 +32,20 @@ public class HumanPlayer extends Player {
 
     }
 
+    private boolean checkForValidInput(String coord) {
+        this.coordinatesChars = coord.toCharArray();
+        System.out.println(coord.indexOf(','));
+        if (coord.length() != 5 || coord.indexOf(',') == -1) {
+            return false;
+        } else if (Character.isDigit(coordinatesChars[0]) == true || Character.isDigit(coordinatesChars[3]) == true
+                || Character.isDigit(coordinatesChars[1]) == false || Character.isDigit(coordinatesChars[4]) == false) {
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     public String shootAtCoord() {
         System.out.println(String.format("Shoot at coordinate: __"));
         String coord = scanner.next();
@@ -48,10 +64,6 @@ public class HumanPlayer extends Player {
             System.out.println("Shot was fired by the Computer");
             return true;
         }
-    }
-    @Override
-    public void changeTurn() {
-        playerTurn = "computer";
     }
 
     @Override

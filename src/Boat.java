@@ -1,22 +1,31 @@
 import java.util.ArrayList;
 import java.lang.Math;
 public class Boat {
-    String type;
-    int length;
-    String[] coord;
-    String symbol;
-    ArrayList<Cell> cells = new ArrayList<Cell>();
-    ArrayList<String> fullCoordinateList = new ArrayList<String>();
-    char tmpFChar = Character.MIN_VALUE;
-    char tmpSChar = Character.MIN_VALUE;
-    int tmpFInt = Integer.MIN_VALUE;
-    int tmpSInt = Integer.MIN_VALUE;
-    String mergedCoord = "";
-    boolean horizontal = false;
-    boolean vertical = false;
-    boolean isDestroyed;
-    boolean human;
-    boolean validLength;
+    private String type;
+    private int length;
+    private String symbol;
+    private ArrayList<Cell> cells = new ArrayList<Cell>();
+    private ArrayList<String> fullCoordinateList = new ArrayList<String>();
+    private char tmpFChar = Character.MIN_VALUE;
+    private char tmpSChar = Character.MIN_VALUE;
+    private int tmpFInt = Integer.MIN_VALUE;
+    private int tmpSInt = Integer.MIN_VALUE;
+    private String mergedCoord = "";
+    private boolean horizontal = false;
+    private boolean vertical = false;
+    private boolean isDestroyed;
+    private boolean human;
+    private boolean validLength;
+    private String[] coordinatsList;
+    private String[] firstCoordinate;
+    private char fFirstPosition;
+    private int fSecondPosition;
+    private String[] secondCoordinate;
+    private char sFirstPosition;
+    private int sSecondPosition;
+    private int compareChars;
+    private boolean cellTouched;
+
     
     public Boat(String type, int lenght, String coord, String symbol, boolean human) {
         this.type = type;
@@ -34,22 +43,8 @@ public class Boat {
         return cells;
     }
     
-    public void receiveHit() {
-        for (int index = 0; index < cells.size(); index++) { 		      
-            cells.get(index); 		
-        }   		
-    }
-    
-    public String getTypeChar() {
-        return this.type;
-    }
-
     public boolean getValidLength() {
         return this.validLength;
-    }
-    
-    public int getLength() {
-        return this.length;
     }
 
     public boolean isSunk() {
@@ -57,7 +52,6 @@ public class Boat {
     }
 
     public boolean checkIfIsDestroyed() {
-        boolean cellTouched;
         for (int i = 0; i < cells.size(); ++i) {
             cellTouched = cells.get(i).aliveOrTouched();
             if (cellTouched == false) {
@@ -78,14 +72,14 @@ public class Boat {
     }
 
     private void getCoordinates(String cord,int lenght) {
-        String[] coordinatsList = cord.split(",");
-        String[] firstCoordinate = coordinatsList[0].split("");
-        char fFirstPosition = firstCoordinate[0].charAt(0);
-        int fSecondPosition = Integer.parseInt(firstCoordinate[1]);
-        String[] secondCoordinate = coordinatsList[1].split("");
-        char sFirstPosition = secondCoordinate[0].charAt(0);
-        int sSecondPosition = Integer.parseInt(secondCoordinate[1]);
-        int compareChars = Character.compare(fFirstPosition, sFirstPosition);
+        coordinatsList = cord.split(",");
+        firstCoordinate = coordinatsList[0].split("");
+        fFirstPosition = firstCoordinate[0].charAt(0);
+        fSecondPosition = Integer.parseInt(firstCoordinate[1]);
+        secondCoordinate = coordinatsList[1].split("");
+        sFirstPosition = secondCoordinate[0].charAt(0);
+        sSecondPosition = Integer.parseInt(secondCoordinate[1]);
+        compareChars = Character.compare(fFirstPosition, sFirstPosition);
         
         if ((Math.abs(compareChars) != lenght-1 & compareChars != 0)
                 || (Math.abs(fSecondPosition-sSecondPosition) != 0

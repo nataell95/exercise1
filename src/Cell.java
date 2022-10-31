@@ -1,10 +1,10 @@
 public class Cell {
-    String value;
-    String coord;
-    String symbol;
-    boolean isboat;
-    boolean isTouched;
-    boolean human;
+    private String value;
+    private String coord;
+    private String symbol;
+    private boolean isboat;
+    private boolean isTouched;
+    private boolean human;
     
     public Cell(String coord, String symbol, boolean isboat, boolean human) {
         this.value = " ";
